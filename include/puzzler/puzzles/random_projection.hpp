@@ -124,7 +124,7 @@ namespace puzzler
       
       log->LogInfo("Beginning projections");
       for(unsigned i=0; i<n; i++){
-        log->LogInfo("Projection %u of %u", i, n);
+        log->LogVerbose("Projection %u of %u", i, n);
         auto proj = MakeProjection(n, rnd(), p);
         ApplyAndAccProjection(n, acc, proj, v);
       }
