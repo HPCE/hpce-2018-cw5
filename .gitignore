@@ -1,0 +1,11 @@
+*.o
+*.exe
+*.lib
+*.a
+*.in
+*.ref
+*.got
+*.stackdump
+
+w/
+/provider/*.o
