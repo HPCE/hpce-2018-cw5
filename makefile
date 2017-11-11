@@ -26,7 +26,7 @@ serenity_now_% : all
 	bin/create_puzzle_input $* 100 2 > w/$*.in
 	cat w/$*.in | bin/execute_puzzle 1 2 > w/$*.ref.out
 	cat w/$*.in | bin/execute_puzzle 0 2 > w/$*.got.out
-	bin/compare_puzzle_output w/$*.ref.out w/$*.got.out 2
+	bin/compare_puzzle_output w/$*.in w/$*.ref.out w/$*.got.out 2
 
 serenity_now : $(foreach x,mining heat_world gaussian_blur edit_distance random_projection hold_time,serenity_now_$(x))
 
