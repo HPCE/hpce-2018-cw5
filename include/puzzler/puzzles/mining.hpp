@@ -142,7 +142,12 @@ namespace puzzler
       for(unsigned i=0; i<4; i++){
         params->key.push_back(rnd());
       }
-      params->threshold=(uint64_t)(pow(2.0,64) / (scale*scale));
+      
+      if(scale <=4){
+        params->threshold=0xFFFFFFFFFFFFFFFFull;
+      }else{
+        params->threshold=(uint64_t)(pow(2.0,64) / (scale*scale));
+      }
 
       return params;
     }
