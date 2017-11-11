@@ -96,7 +96,7 @@ namespace puzzler
           for(int xIn=0; xIn < (int)pInput->width; xIn++){
             for(int yIn=0; yIn < (int)pInput->height; yIn++){
               double contrib = coeff(xIn-xOut, yIn-yOut, pInput->radius);
-              acc += contrib * pInput->pixels[yIn*pInput->width];
+              acc += contrib * pInput->pixels[yIn*pInput->width+xIn];
             }
           }
 
