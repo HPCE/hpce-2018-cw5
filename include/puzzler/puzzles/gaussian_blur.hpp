@@ -76,7 +76,7 @@ namespace puzzler
 
     double coeff(int dx, int dy, double r) const
     {
-      return exp(- (dx*dx+dy*dy) / (2*r) ) / (2 * 3.1415926535897932384626433832795 * r * r);
+      return exp(- (dx*dx+dy*dy) / (2*r) ) / (2 * 3.1415926535897932384626433832795 * r);
     }
 
     void ReferenceExecute(
