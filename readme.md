@@ -26,6 +26,12 @@ of scale factors. There is also an emphasis on
 good scaling - how large a scale parameter can
 be executed?
 
+The set of driver programs included are fairly basic, and have
+no particular importance beyond making it easy to call
+`Execute` (testing will use a different driver program). You can infer
+how they work from the source; look at the `serenity_now` makefile
+targe; or there is some [brief guidance here](https://github.com/HPCE/hpce-2017-cw5/issues/7).
+
 The target platform is an AWS GPU (g2.2xlarge) instance. _I would
 prefer to use a bigger instance, but this is the most economical,
 and I don't want people running out of money here. I will probably
