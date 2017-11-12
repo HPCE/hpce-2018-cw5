@@ -110,7 +110,7 @@ namespace puzzler
 			  ) const
     {
       unsigned n=pInput->n;
-      double p=16/n;
+      double p=16.0/n;
       
       std::vector<uint64_t> acc(n, 0);
       
