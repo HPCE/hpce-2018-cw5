@@ -7,6 +7,10 @@ HPCE 2017 CW5
 Errata
 ------
 
+- 2017/11/12 19:57 : Fix to calculation of `p` due [to a missing `.0`](https://github.com/HPCE/hpce-2017-cw5/issues/9).
+  This is a breaking change - [this commit](https://github.com/HPCE/hpce-2017-cw5/commit/1a48980ca37c94626609d244523c646893ca56a1)
+  shows the exact change. Thanks to @Wiijah.
+
 - 2017/11/12 09:31 : 2nd update to Gaussian Blur [due to a conversion error](https://github.com/HPCE/hpce-2017-cw5/issues/2).
   This is a breaking change - [this commit](https://github.com/HPCE/hpce-2017-cw5/commit/75597bf9127d2de0609b9140ae98188c86546da2#diff-21875e3b4a1a684a0b4a86d747c02c44)
   shows the exact change. Thanks to @malharjajoo.
