@@ -159,7 +159,7 @@ namespace puzzler
           float h=0.2*sinf(x*f2+p2);
           float r=udist(rnd)*0.1;
           float t=v+h+r;
-          t=std::min(0.0f, std::max(1.0f, t));
+          t=std::max(0.0f, std::min(1.0f, t));
           params->pixels[y*params->height+x]=(uint8_t)(t*255);
         }
       }
