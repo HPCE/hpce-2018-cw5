@@ -7,6 +7,9 @@ HPCE 2017 CW5
 Errata
 ------
 
+- 2017/11/14 18:56 : Particularly [dumb mistake]() in heat_world. I notice quite a lot of groups already fixed in their
+  repo based on past experience, so while it is a breaking change it's fine to fix. [this commit](https://github.com/HPCE/hpce-2017-cw5/commit/d3e1441813a960853cfcceff6a545de315e896a7). Thanks to @thomasrarris.
+
 - 2017/11/12 19:57 : Fix to calculation of `p` due [to a missing `.0`](https://github.com/HPCE/hpce-2017-cw5/issues/9).
   This is a breaking change - [this commit](https://github.com/HPCE/hpce-2017-cw5/commit/1a48980ca37c94626609d244523c646893ca56a1)
   shows the exact change. Thanks to @Wiijah.
