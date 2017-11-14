@@ -145,6 +145,7 @@ namespace puzzler
               
               res=std::min(1.0f, std::max(-1.0f, res));
               
+	      buffer[index] = res;
             }
           }
         }
