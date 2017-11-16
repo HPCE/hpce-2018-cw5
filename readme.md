@@ -170,11 +170,13 @@ Deliverable format
       by linking against `lib/libpuzzler.a`.
 
     - **Note**: If you do something complicated in your building of libpuzzler, it should still be
-      possible to build it by going into `lib` and calling `make all`.
+      possible to build it by going into `provider` and calling `make all`.
 
     - The current working directory during execution will be the root of the repository. So
       it will be executed as if typing `bin/execute_puzzle`, and an opencl kernel could be
       loaded using the relative path `provider/something.kernel`.
+     
+    - Programs which link against and use `lib/libpuzzler.a` will also link in TBB and OpenCL.
 
 - The programs in `src` have no special meaning or status, they are just example programs
 
