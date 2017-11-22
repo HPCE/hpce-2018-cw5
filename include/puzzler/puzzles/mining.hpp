@@ -146,7 +146,7 @@ namespace puzzler
       if(scale <=4){
         params->threshold=0xFFFFFFFFFFFFFFFFull;
       }else{
-        params->threshold=(uint64_t)(pow(2.0,64) / (scale*scale));
+        params->threshold=(uint64_t)(pow(2.0,64) / (scale*(double)scale));
       }
 
       return params;
