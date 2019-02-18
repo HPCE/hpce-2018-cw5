@@ -1,4 +1,6 @@
+The deadline for this assignment is
 
+	22:00 Mon 4 Mar 2019
 
 Code infrastructure
 ===================
@@ -246,4 +248,4 @@ done
 Submission
 ==========
 
-The code in github forms your submission, though you must submit your final hash via blackboard for time-keeping and non-repudiation purposes. Pushes to github after the deadline will not be treated as submissions, unless the new hash is also submitted after the deadline.
+The code in github forms your submission, though you must submit your final hash via blackboard for time-keeping and non-repudiation purposes. Pushes to github after the deadline will not be treated as submissions, unless the new hash is also submitted after the deadline. All members of each group must submit the same hash to show agreement.
