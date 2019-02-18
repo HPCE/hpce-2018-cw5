@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
    puzzler::PuzzleRegistrar::UserRegisterPuzzles();
 
    if(argc<2){
-      fprintf(stderr, "create_puzzle_input name scale logLevel\n");
+      fprintf(stderr, "create_puzzle_input name scale [logLevel]\n");
       std::cout<<"Puzzles:\n";
       puzzler::PuzzleRegistrar::ListPuzzles();
       exit(1);
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
       std::shared_ptr<puzzler::ILog> logDest=std::make_shared<puzzler::LogDest>("run_puzzle", logLevel);
       logDest->Log(puzzler::Log_Info, "Created log.");
 
-      auto puzzle=puzzler::PuzzleRegistrar::Lookup(name);
+      auto puzzle=puzzler::PuzzleRegistrar::LookupPuzzle(name);
       if(!puzzle)
          throw std::runtime_error("No puzzle registered with name "+name);
 

@@ -5,6 +5,11 @@
 #include "puzzler/core/log.hpp"
 #include <map>
 #include <iostream>
+#include <typeinfo>
+
+#ifdef __GNUC__
+#include <cxxabi.h>
+#endif
 
 namespace puzzler
 {
@@ -104,6 +109,9 @@ namespace puzzler
     //! Unique name for the puzzle
     virtual std::string Name() const=0;
 
+    //! Default name associated with the engine (note that other aliases may exist)
+    virtual std::string Engine() const=0;
+
     //! Create input with difficulty scale
     virtual std::shared_ptr<Input> CreateInput(ILog *log, int scale) const=0;
 
@@ -136,18 +144,28 @@ namespace puzzler
   class PuzzleRegistrar
   {
   private:
-    static std::map<std::string,std::shared_ptr<Puzzle> > &Registry()
+    static std::map<std::string,std::shared_ptr<Puzzle> > &EngineRegistry()
+    {
+      static std::map<std::string,std::shared_ptr<Puzzle> > registry;
+      return registry;
+    }
+
+    static std::map<std::string,std::shared_ptr<Puzzle> > &PuzzleRegistry()
     {
       static std::map<std::string,std::shared_ptr<Puzzle> > registry;
       return registry;
     }
   public:
-    static void Register(std::shared_ptr<Puzzle> puzzle)
+    static void Register(std::string engineAlias, std::shared_ptr<Puzzle> puzzle)
     {
-      if(Registry().find(puzzle->Name())!=Registry().end())
-	      throw std::runtime_error("PuzzleRegistrar::Register - There is already a handler for '"+puzzle->Name()+"'");
+      if(EngineRegistry().find(engineAlias)!=EngineRegistry().end())
+	      throw std::runtime_error("PuzzleRegistrar::Register - There is already an engine called '"+engineAlias+"'");
 
-      Registry()[puzzle->Name()]=puzzle;
+      EngineRegistry()[engineAlias]=puzzle;
+
+      if(PuzzleRegistry().find(puzzle->Name())==PuzzleRegistry().end()){
+        PuzzleRegistry()[puzzle->Name()]=puzzle;
+      }
     }
 
     static std::shared_ptr<Puzzle::Input> LoadInput(PersistContext &ctxt)
@@ -155,7 +173,7 @@ namespace puzzler
       std::string format, name;
       ctxt.SendOrRecv(format).SendOrRecv(name);
 
-      auto puzzle=Lookup(name);
+      auto puzzle=LookupPuzzle(name);
       if(!puzzle){
 	      throw std::runtime_error("PuzzleRegistrar::LoadInput - No handler for type '"+name+"'");
       }
@@ -168,7 +186,7 @@ namespace puzzler
       std::string format, name;
       ctxt.SendOrRecv(format).SendOrRecv(name);
 
-      auto puzzle=Lookup(name);
+      auto puzzle=LookupPuzzle(name);
       if(!puzzle){
 	      throw std::runtime_error("PuzzleRegistrar::LoadOutput - No handler for type '"+name+"'");
       }
@@ -176,19 +194,36 @@ namespace puzzler
       return puzzle->LoadOutput(format, name, ctxt);
     }
 
-    static std::shared_ptr<Puzzle> Lookup(std::string name)
+    static std::shared_ptr<Puzzle> LookupPuzzle(std::string name)
     {
-      auto it=Registry().find(name);
-      if(it==Registry().end())
+      auto it=PuzzleRegistry().find(name);
+      if(it==PuzzleRegistry().end())
+	      return std::shared_ptr<Puzzle>();
+      return it->second;
+    }
+
+    static std::shared_ptr<Puzzle> LookupEngine(std::string name)
+    {
+      auto it=EngineRegistry().find(name);
+      if(it==EngineRegistry().end())
 	      return std::shared_ptr<Puzzle>();
       return it->second;
     }
 
     static void ListPuzzles()
     {
-      auto it=Registry().begin();
-      while(it!=Registry().end()){
+      auto it=PuzzleRegistry().begin();
+      while(it!=PuzzleRegistry().end()){
         std::cout<<it->second->Name()<<"\n";
+        ++it;
+      }
+    }
+
+    static void ListEngines()
+    {
+      auto it=EngineRegistry().begin();
+      while(it!=EngineRegistry().end()){
+        std::cout<<it->first<<" ["<<it->second->Name()<<"] -> "<<it->second->Engine()<<"\n";
         ++it;
       }
     }
@@ -223,6 +258,23 @@ namespace puzzler
     ) const=0;
 
   public:
+    std::string Engine() const override
+    {
+      #ifdef __GNUC__
+      int status;
+      char *name=abi::__cxa_demangle(typeid(*this).name(), 0, 0, &status);
+      if(!name){
+        return  typeid(*this).name();
+      }else{
+        std::string res=name;
+        free(name);
+        return res;
+      }
+      #else
+      return typeid(*this).name();
+      #endif
+    }
+
     virtual void Execute(
 			 ILog *log,
 			 const Input *pInput,

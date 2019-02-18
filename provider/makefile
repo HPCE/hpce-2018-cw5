@@ -1,11 +1,12 @@
 SHELL=/bin/bash
 
 CPPFLAGS += -std=c++11 -W -Wall  -g
-CPPFLAGS += -O3
+CPPFLAGS += -O3 -DNDEBUG=1
 CPPFLAGS += -I ../include
+CPPFLAGS += -Wno-unused-parameter -Wno-unused-variable
 
-# Force IEEE. As suggested in issue.
-CPPFLAGS += -msse2 -ffloat-store
+# Useful for profiling
+CPPFLAGS += -fno-omit-frame-pointer
 
 puzzles.o : $(wildcard *.hpp) $(wildcard ../include/puzzler/*.hpp ../include/puzzler/*/*.hpp)
 

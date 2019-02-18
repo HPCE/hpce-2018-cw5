@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
 {
    puzzler::PuzzleRegistrar::UserRegisterPuzzles();
 
-   if(argc<2){
-      fprintf(stderr, "run_puzzle name scale logLevel\n");
+   if(argc<3){
+      fprintf(stderr, "run_puzzle engine scale [logLevel]\n");
       std::cout<<"Puzzles:\n";
-      puzzler::PuzzleRegistrar::ListPuzzles();
+      puzzler::PuzzleRegistrar::ListEngines();
       exit(1);
    }
 
@@ -20,17 +20,20 @@ int main(int argc, char *argv[])
 
       int scale=atoi(argv[2]);
 
+      int logLevel=2;
       // Control how much is being output.
       // Higher numbers give you more info
-      int logLevel=atoi(argv[3]);
-      fprintf(stderr, "LogLevel = %s -> %d\n", argv[3], logLevel);
+      if(argc>3){
+         logLevel=atoi(argv[3]);
+         fprintf(stderr, "LogLevel = %s -> %d\n", argv[3], logLevel);
+      }
 
       std::shared_ptr<puzzler::ILog> logDest=std::make_shared<puzzler::LogDest>("run_puzzle", logLevel);
       logDest->Log(puzzler::Log_Info, "Created log.");
 
-      auto puzzle=puzzler::PuzzleRegistrar::Lookup(name);
+      auto puzzle=puzzler::PuzzleRegistrar::LookupEngine(name);
       if(!puzzle)
-	    throw std::runtime_error("No puzzle registered with name "+name);
+	    throw std::runtime_error("No engine registered with name "+name);
 
       logDest->LogInfo("Creating random input");
       auto input=puzzle->CreateInput(logDest.get(), scale);

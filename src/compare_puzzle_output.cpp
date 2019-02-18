@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
    puzzler::PuzzleRegistrar::UserRegisterPuzzles();
 
    if(argc<3){
-      fprintf(stderr, "compare_puzzle_output input ref got logLevel\n");
+      fprintf(stderr, "compare_puzzle_output input ref got [logLevel]\n");
       std::cout<<"Puzzles:\n";
       puzzler::PuzzleRegistrar::ListPuzzles();
       exit(1);
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
       // Control how much is being output.
       // Higher numbers give you more info
       int logLevel=2;
-      if(argc>3){
+      if(argc>4){
           logLevel = atoi(argv[4]);
           fprintf(stderr, "LogLevel = %s -> %d\n", argv[4], logLevel);
       }
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
      std::string puzzleName=input->PuzzleName();
 
      logDest->LogInfo("Creating puzzle %s to match input", puzzleName.c_str());
-     auto puzzle=puzzler::PuzzleRegistrar().Lookup(puzzleName);
+     auto puzzle=puzzler::PuzzleRegistrar().LookupPuzzle(puzzleName);
 
       logDest->LogInfo("Loading reference %s", refName.c_str());
       std::shared_ptr<puzzler::Puzzle::Output> ref;
