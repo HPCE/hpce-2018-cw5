@@ -185,7 +185,11 @@ this means that if $t_B=60$ then the timeout for the final puzzle is 90 seconds.
 
 Note that in the case of `ising` our competent person was able to correctly
 parallelise using TBB in a number of ways and also tried some OpenCL, but did
-not manage to make it any faster despite using more cores.
+not manage to make it any faster despite using more cores. According to the
+marks schema that means that if you manage to make ising faster, then you
+start from a base level of 40%. Note that ising is not specifically a harder
+problem, but it requires more thought and analysis to determine where to
+start.
 
 The expert observed that they weren't at the limits of performance on
 any puzzle, only of implementation time, so if you end up with higher
