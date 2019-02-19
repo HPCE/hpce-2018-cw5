@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
    puzzler::PuzzleRegistrar::UserRegisterPuzzles();
 
-   if(argc<3){
+   if(argc<4){
       fprintf(stderr, "compare_puzzle_output input ref got [logLevel]\n");
       std::cout<<"Puzzles:\n";
       puzzler::PuzzleRegistrar::ListPuzzles();

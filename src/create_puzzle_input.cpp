@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
    puzzler::PuzzleRegistrar::UserRegisterPuzzles();
 
-   if(argc<2){
+   if(argc<3){
       fprintf(stderr, "create_puzzle_input name scale [logLevel]\n");
       std::cout<<"Puzzles:\n";
       puzzler::PuzzleRegistrar::ListPuzzles();
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
       // Control how much is being output.
       // Higher numbers give you more info
       int logLevel=3;
-      if(argc>2){
+      if(argc>3){
         logLevel=atoi(argv[3]);
         fprintf(stderr, "LogLevel = %s -> %d\n", argv[3], logLevel);
       }
