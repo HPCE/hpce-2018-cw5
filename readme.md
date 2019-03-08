@@ -178,20 +178,12 @@ In order to manage execution time in assessment (e.g. in the case of an infinite
 if $1.5*t_B < t_{n+1}$ then we assume that $t_{n+1} = \infty$. Practically speaking
 this means that if $t_B=60$ then the timeout for the final puzzle is 90 seconds.
 
-| Puzzle      | Sequence             | Reference   | Competent  | Expert |
-|-------------|----------------------|-------------|------------|--------|
-| rank        | `50+(i*50+U*20)^2`   | 41.8        | 44.6       |  60.2  |
-| decompose   | `20+(i*30+U*10)^1.2` | 15.2        | 26.8       |  38.8  |
-| ising       | `20+(i*20+U*5)`      | 14.7        | 14.7       |  31.7  |
-| integral    | `20+(i*20+U*5)`      | 15.8        | 59.0       | 172.6  |
-
-Note that in the case of `ising` our competent person was able to correctly
-parallelise using TBB in a number of ways and also tried some OpenCL, but did
-not manage to make it any faster despite using more cores. According to the
-marks schema that means that if you manage to make ising faster, then you
-start from a base level of 40%. Note that ising is not specifically a harder
-problem, but it requires more thought and analysis to determine where to
-start.
+| Puzzle      | Sequence             | Reference   | Competent  | Expert   |
+|-------------|----------------------|-------------|------------|----------|
+| rank        | `50+(i*50+U*20)^2`   | 44.0204     | 44.5988    | 60.3589  |
+| decompose   | `20+(i*30+U*10)^1.2` | 15.6776     | 26.2594    | 38.1175  |
+| ising       | `20+(i*20+U*5)`      | 18.4901     | 18.6079    | 35.8866  |
+| integral    | `20+(i*20+U*5)`      | 23.1698     | 37.4578    | 172.847  |
 
 The expert observed that they weren't at the limits of performance on
 any puzzle, only of implementation time, so if you end up with higher
