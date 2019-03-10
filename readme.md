@@ -180,10 +180,10 @@ this means that if $t_B=60$ then the timeout for the final puzzle is 90 seconds.
 
 | Puzzle      | Sequence             | Reference   | Competent  | Expert   |
 |-------------|----------------------|-------------|------------|----------|
-| rank        | `50+(i*50+U*20)^2`   | 44.0204     | 44.5988    | 60.3589  |
-| decompose   | `20+(i*30+U*10)^1.2` | 15.6776     | 26.2594    | 38.1175  |
-| ising       | `20+(i*20+U*5)`      | 18.4901     | 18.6079    | 35.8866  |
-| integral    | `20+(i*20+U*5)`      | 23.1698     | 37.4578    | 172.847  |
+| rank        | `50+(i*50+U*20)^2`   | X           | X          | X        |
+| decompose   | `20+(i*30+U*10)^1.2` | X           | X          | X        |
+| ising       | `20+(i*20+U*5)`      | X           | X          | X        |
+| integral    | `20+(i*20+U*5)`      | X           | X          | X        |
 
 The expert observed that they weren't at the limits of performance on
 any puzzle, only of implementation time, so if you end up with higher
